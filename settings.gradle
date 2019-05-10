@@ -1,0 +1,3 @@
+rootProject.name = 'kt2ts-plugin'
+
+include("kt2ts")
