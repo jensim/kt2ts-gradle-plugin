@@ -1,5 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
+}
 plugins {
     kotlin("jvm")
     `maven-publish`
@@ -8,7 +14,6 @@ plugins {
 }
 repositories {
     mavenCentral()
-    mavenLocal()
     maven("https://jitpack.io")
 }
 
@@ -35,15 +40,6 @@ gradlePlugin {
             id = "se.jensim.kt2ts"
             version = "1.0.0-SNAPSHOT"
             implementationClass = "se.jensim.gradle.plugin.kt2ts.Kt2TsPlugin"
-            dependencies {
-                implementation("com.github.ntrrgc:ts-generator:1.1.1")
-                implementation("org.reflections:reflections:0.9.11")
-            }
-            repositories {
-                mavenCentral()
-                mavenLocal()
-                maven("https://jitpack.io")
-            }
         }
     }
 }

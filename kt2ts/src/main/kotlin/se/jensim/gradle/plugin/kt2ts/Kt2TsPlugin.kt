@@ -7,12 +7,12 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.TaskAction
 import org.reflections.Reflections
 import java.io.File
-import java.net.URI
-import java.net.URL
-import java.util.*
 
 open class Kt2TsPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        target.buildscript.repositories.maven {
+            it.setUrl("https://jitpack.io")
+        }
         val task = target.tasks.create("kt2ts", Kt2TsTask::class.java)
         task.dependsOn(
             listOfNotNull(
@@ -20,9 +20,6 @@ open class Kt2TsPlugin : Plugin<Project> {
                 target.tasks.findByName("compileJava")
             )
         )
-        target.repositories.maven {
-            it.url = URI("https://jitpack.io")
-        }
     }
 }
 
@@ -36,28 +33,24 @@ open class Kt2TsTask : DefaultTask() {
     init {
         description =
             "Generate typescript definitions from Kotlin files annotated with the magic word Kotlin2Typescript"
-        inputs.dir("${project.buildDir}")
+        inputs.dir(buildDir)
         outputs.file(fullPath)
     }
 
     @TaskAction
     open fun generateTypescript() {
-        val listOfURL = ArrayList<URL>()
-
         val kotlinClassPath = File("${project.buildDir.absolutePath}/classes/kotlin/main").toURI().toURL()
-        listOfURL.add(kotlinClassPath)
+        val listOfURL = arrayListOf(kotlinClassPath).toTypedArray()
 
-        val classLoader = java.net.URLClassLoader(listOfURL.toTypedArray())
+        val classLoader = java.net.URLClassLoader(listOfURL)
 
-        val reflections = Reflections("com.example", classLoader)
+        val reflections = Reflections(classLoader)
         val annotated = reflections.getTypesAnnotatedWith(Kotlin2Typescript::class.java, false)
 
         val tsParts = TypeScriptGenerator(
             rootClasses = annotated.mapNotNull { it.kotlin }
         ).individualDefinitions
         val ts = tsParts.joinToString("\n\n") { "export $it" }
-
-        println("Generated ${tsParts.size} typescript definitions")
 
         val dir = File("${project.buildDir}", "ts")
         dir.mkdirs()
