@@ -9,4 +9,4 @@ repositories {
 }
 
 group = "se.jensim.testinggrounds.gradle-plugin"
-version = "1.0-SNAPSHOT"
+version = "0.1.0-SNAPSHOT"
