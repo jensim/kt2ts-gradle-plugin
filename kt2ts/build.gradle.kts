@@ -14,6 +14,7 @@ plugins {
     kotlin("jvm")
     `maven-publish`
     `java-gradle-plugin`
+    id("com.gradle.plugin-publish") version "0.10.0"
 }
 repositories {
     mavenCentral()
@@ -66,4 +67,13 @@ publishing {
         }*/
         mavenLocal()
     }
+}
+
+pluginBundle {
+    description = """
+Generate TypeScript Definitions from your existing code.
+In case you have your backend written in kotlin or java and you dont want to write your Angular type definitions yourself.
+            """
+    vcsUrl = "https://github.com/jensim/kt2ts-gradle-plugin"
+    tags = listOf("kotlin", "typescript", "kt2ts", "kt2js", "generate", "definitions", "ts-generator")
 }

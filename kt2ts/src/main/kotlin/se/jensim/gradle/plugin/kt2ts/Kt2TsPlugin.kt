@@ -25,7 +25,6 @@ open class Kt2TsPlugin : Plugin<Project> {
     }
 }
 
-
 open class Kt2TsTask : DefaultTask() {
 
     private val myInputs: List<File> = listOf("kotlin", "java").mapNotNull {
