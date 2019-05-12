@@ -4,13 +4,16 @@ buildscript {
     repositories {
         mavenCentral()
         maven("https://jitpack.io")
+        jcenter()
+    }
+    dependencies {
+        classpath("com.github.jengelman.gradle.plugins:shadow:5.0.0")
     }
 }
 plugins {
     kotlin("jvm")
     `maven-publish`
     `java-gradle-plugin`
-
 }
 repositories {
     mavenCentral()
@@ -20,14 +23,23 @@ repositories {
 group = "se.jensim.kt2ts"
 version = "1.0-SNAPSHOT"
 
-
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(gradleApi())
-    implementation("com.github.ntrrgc:ts-generator:1.1.1")
+    compileOnly("com.github.ntrrgc:ts-generator:1.1.1")
     implementation("org.reflections:reflections:0.9.11")
 
     testImplementation(kotlin("test-junit"))
+}
+
+tasks.withType<Jar> {
+    val deps = listOf("ts-generator")
+        .joinToString("|", "^(", ")$") { "$it.*.jar" }
+    configurations["compileClasspath"]
+        .filter { it.name.matches(Regex(deps)) }
+        .forEach { file: File ->
+            from(zipTree(file.absoluteFile))
+        }
 }
 
 tasks.withType<KotlinCompile> {
@@ -38,7 +50,7 @@ gradlePlugin {
     plugins {
         create("kt2ts") {
             id = "se.jensim.kt2ts"
-            version = "1.0.0-SNAPSHOT"
+            version = "0.1.0-SNAPSHOT"
             implementationClass = "se.jensim.gradle.plugin.kt2ts.Kt2TsPlugin"
         }
     }

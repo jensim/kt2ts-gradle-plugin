@@ -1,8 +1,6 @@
 package com.example
 
-import se.jensim.gradle.plugin.kt2ts.Kotlin2Typescript
-
-@Kotlin2Typescript
+@ToTypescript
 data class OneDataType(val types: List<ThreeDataType>, val e: FouthEnum)
 
 data class TwoDataType(val name: String)

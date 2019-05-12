@@ -22,5 +22,6 @@ class TypeScriptVerificationTest {
         assertFalse(content.contains("TwoDataType"))
         assertTrue(content.contains("ThreeDataType"))
         assertTrue(content.contains("FouthEnum"))
+        assertTrue(content.contains("JavaClassTypes"))
     }
 }

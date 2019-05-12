@@ -1,15 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import se.jensim.gradle.plugin.kt2ts.Kt2TsPluginExtension
 
 buildscript {
     dependencies {
         // THIS:
-        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:1.0.0-SNAPSHOT")
+        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:0.1.0-SNAPSHOT")
     }
     repositories {
         mavenCentral()
-        // THIS: for ts-generator dependency
-        maven("https://jitpack.io")
-        mavenLocal()//Never mind this - its for dev purposes
+        mavenLocal()
     }
 }
 // THIS: for the task
@@ -22,14 +21,15 @@ repositories {
     mavenLocal()
 }
 
+configure<Kt2TsPluginExtension> {
+    annotation = "com.example.ToTypescript"
+}
+
 group = "com.example"
 version = "1.0-SNAPSHOT"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-
-    // THIS: for the annotation
-    implementation("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:1.0.0-SNAPSHOT")
 
     testImplementation(kotlin("test-junit"))
 }
