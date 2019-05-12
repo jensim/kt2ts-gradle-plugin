@@ -1,5 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import se.jensim.gradle.plugin.kt2ts.Kt2TsPluginExtension
+import se.jensim.gradle.plugin.kt2ts.kt2ts
 
 buildscript {
     dependencies {
@@ -21,7 +21,7 @@ repositories {
     mavenLocal()
 }
 
-configure<Kt2TsPluginExtension> {
+kt2ts {
     annotation = "com.example.ToTypescript"
 }
 
