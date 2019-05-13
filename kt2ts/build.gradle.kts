@@ -47,11 +47,22 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+pluginBundle {
+    description = """
+Generate TypeScript Definitions from your existing code.
+In case you have your backend written in kotlin or java and you dont want to write your Angular type definitions yourself.
+            """
+    website = "https://github.com/jensim/kt2ts-gradle-plugin"
+    vcsUrl = "https://github.com/jensim/kt2ts-gradle-plugin"
+    tags = listOf("kotlin", "typescript", "kt2ts", "kt2js", "generate", "definitions", "ts-generator")
+}
+
 gradlePlugin {
     plugins {
         create("kt2ts") {
             id = "se.jensim.kt2ts"
             version = "0.1.0-SNAPSHOT"
+            displayName = "Kotlin2TypeScript"
             implementationClass = "se.jensim.gradle.plugin.kt2ts.Kt2TsPlugin"
         }
     }
@@ -67,13 +78,4 @@ publishing {
         }*/
         mavenLocal()
     }
-}
-
-pluginBundle {
-    description = """
-Generate TypeScript Definitions from your existing code.
-In case you have your backend written in kotlin or java and you dont want to write your Angular type definitions yourself.
-            """
-    vcsUrl = "https://github.com/jensim/kt2ts-gradle-plugin"
-    tags = listOf("kotlin", "typescript", "kt2ts", "kt2js", "generate", "definitions", "ts-generator")
 }
