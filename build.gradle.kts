@@ -22,7 +22,7 @@ repositories {
 }
 
 group = "se.jensim.kt2ts"
-version = "0.2.0-SNAPSHOT"
+version = "0.3.0-SNAPSHOT"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
@@ -61,7 +61,7 @@ gradlePlugin {
     plugins {
         create("kt2ts") {
             id = "se.jensim.kt2ts"
-            version = "0.2.0"
+            version = project.version
             displayName = "Kotlin2TypeScript"
             implementationClass = "se.jensim.gradle.plugin.kt2ts.Kt2TsPlugin"
         }
