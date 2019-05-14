@@ -11,8 +11,5 @@ jobs:
   - stage: Build and test
     script: "./gradlew build"
   - stage: Publish to gradle portal
-    script:
-    - mkdir -p ~/.gradle
-    - echo "gradle.publish.key=$APIKEY\ngradle.publish.secret=$APISECRET" > ~/.gradle/gradle.properties
-    - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
+    script: "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
     if: tag IS present
