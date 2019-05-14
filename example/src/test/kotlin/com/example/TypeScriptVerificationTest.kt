@@ -9,9 +9,7 @@ class TypeScriptVerificationTest {
 
     @Test
     fun `verify that a typescript file has been created and is not empty`() {
-        val resource = javaClass.classLoader.getResource("/build/ts/kt2ts.d.ts")
-        val toURI = resource.toURI()
-        val file = File(toURI)
+        val file = File("build/ts/kt2ts.d.ts")
         val exists = file.exists()
 
         assertTrue(exists)

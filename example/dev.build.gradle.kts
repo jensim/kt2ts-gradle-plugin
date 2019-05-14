@@ -5,15 +5,17 @@ plugins {
     id("com.github.jensim.kt2ts-gradle-plugin") version "master-SNAPSHOT"
     kotlin("jvm") version "1.3.31"
 }
-
-kt2ts {
-    annotation = "com.example.ToTypescript"
+repositories {
+    mavenCentral()
 }
-
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     testImplementation(kotlin("test-junit"))
+}
+
+kt2ts {
+    annotation = "com.example.ToTypescript"
 }
 
 tasks.withType<KotlinCompile> {
