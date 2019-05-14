@@ -14,5 +14,5 @@ jobs:
     script:
     - mkdir -p ~/.gradle
     - echo "gradle.publish.key=$APIKEY\ngradle.publish.secret=$APISECRET" > ~/.gradle/gradle.properties
-    - "./gradlew -PreleaseVersion=$TRAVIS_TAG :publishPlugins"
+    - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
     if: tag IS present
