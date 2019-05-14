@@ -65,7 +65,7 @@ open class Kt2TsTask : DefaultTask() {
     }
 
     @OutputFile
-    fun getOutputDir() = File(fullPath)
+    fun getOutput() = File(fullPath)
 
     @TaskAction
     open fun generateTypescript() {
@@ -86,9 +86,9 @@ open class Kt2TsTask : DefaultTask() {
         ).individualDefinitions
         val ts = tsParts.joinToString("\n\n") { "export $it" }
 
-        val dir = File("${project.buildDir}", "ts")
+        val output = getOutput()
+        val dir = output.parentFile
         dir.mkdirs()
-        val output = File(dir, "kt2ts.d.ts")
         output.writeText(ts)
     }
 }

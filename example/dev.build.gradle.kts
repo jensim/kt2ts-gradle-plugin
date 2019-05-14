@@ -28,6 +28,8 @@ dependencies {
 
 kt2ts {
     annotation = "com.example.ToTypescript"
+    classesDirs = files("$buildDir/classes/kotlin/main")
+    outputFile = file("$buildDir/ts.d.ts")
 }
 
 tasks.withType<KotlinCompile> {
