@@ -3,7 +3,7 @@ import se.jensim.gradle.plugin.kt2ts.kt2ts
 
 plugins {
     kotlin("jvm") version "1.3.31"
-    id("se.jensim.kt2ts") version "0.3.0"
+    id("se.jensim.kt2ts") version "0.4.0"
 }
 
 repositories {
@@ -46,4 +46,4 @@ tasks.withType<KotlinCompile> {
 }
 
 group = "se.jensim.kt2ts-example"
-version = "0.4.0-SNAPSHOT"
+version = "0.5.0-SNAPSHOT"

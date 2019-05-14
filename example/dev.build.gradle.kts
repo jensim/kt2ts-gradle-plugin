@@ -10,7 +10,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:0.4.0-SNAPSHOT")
+        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:0.5.0-SNAPSHOT")
     }
 }
 apply(plugin = "se.jensim.kt2ts")

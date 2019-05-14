@@ -7,7 +7,7 @@ Great when working with Angular or other TypeScript frameworks.
 build.kotlin.kts
 ```kotlin
 plugins {
-    id("se.jensim.kt2ts") version "0.3.0"
+    id("se.jensim.kt2ts") version "0.4.0"
 }
 
 kt2ts {
