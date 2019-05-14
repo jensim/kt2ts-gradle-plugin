@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import se.jensim.gradle.plugin.kt2ts.kt2ts
 
 plugins {
     kotlin("jvm") version "1.3.31"
@@ -46,4 +45,4 @@ tasks.withType<KotlinCompile> {
 }
 
 group = "se.jensim.kt2ts-example"
-version = "0.5.0-SNAPSHOT"
+version = "DEV"

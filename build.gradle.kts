@@ -22,7 +22,7 @@ repositories {
 }
 
 group = "se.jensim.kt2ts"
-version = "0.5.0-SNAPSHOT"
+version = findProperty("releaseVersion") ?: "DEV"
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))

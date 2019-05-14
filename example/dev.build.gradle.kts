@@ -4,13 +4,12 @@ import se.jensim.gradle.plugin.kt2ts.kt2ts
 buildscript {
     repositories {
         repositories {
-            mavenCentral()
             mavenLocal()
             gradlePluginPortal()
         }
     }
     dependencies {
-        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:0.5.0-SNAPSHOT")
+        classpath("se.jensim.kt2ts:se.jensim.kt2ts.gradle.plugin:DEV")
     }
 }
 apply(plugin = "se.jensim.kt2ts")
