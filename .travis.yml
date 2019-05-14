@@ -10,6 +10,9 @@ jobs:
   include:
   - stage: Build and test
     script: "./gradlew build"
+    if: tag IS blank
   - stage: Publish to gradle portal
-    script: "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
+    script:
+      - "./gradlew build"
+      - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
     if: tag IS present
