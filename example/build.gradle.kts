@@ -24,4 +24,4 @@ tasks.withType<KotlinCompile> {
 }
 
 group = "se.jensim.kt2ts-example"
-version = "0.1.0-SNAPSHOT"
+version = "0.2.0-SNAPSHOT"
