@@ -51,6 +51,18 @@ pluginBundle {
     description = """
 Generate TypeScript Definitions from your existing code.
 In case you have your backend written in kotlin or java and you dont want to write your Angular type definitions yourself.
+
+plugins {
+    id("se.jensim.kt2ts") version "${project.version}"
+}
+
+kt2ts {
+    annotation = "com.example.ToTypescript"
+    classesDirs = files(
+            tasks.findByName("compileKotlin")?.outputs,
+            tasks.findByName("compileJava")?.outputs)
+    outputFile = file("${"$"}buildDir/ts/kt2ts.d.ts")
+}
             """
     website = "https://github.com/jensim/kt2ts-gradle-plugin"
     vcsUrl = "https://github.com/jensim/kt2ts-gradle-plugin"

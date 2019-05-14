@@ -2,7 +2,6 @@ package se.jensim.gradle.plugin.kt2ts
 
 import me.ntrrgc.tsGenerator.TypeScriptGenerator
 import org.gradle.api.DefaultTask
-import org.gradle.api.UnknownDomainObjectException
 import org.gradle.api.file.FileCollection
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputFile
@@ -12,35 +11,8 @@ import java.io.File
 
 open class Kt2TsTask : DefaultTask() {
 
-    private val defaultInputs: List<File> = listOf("kotlin", "java").mapNotNull {
-        try {
-            val file = File("${project.buildDir.absolutePath}/classes/$it/main")
-            if (file.exists() && file.isDirectory && file.canRead()) {
-                file
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    private val buildDir = "${project.buildDir}/ts"
-    private val fileName = "kt2ts.d.ts"
-    private val fullPath
-        get() = try {
-            project.extensions.getByType(Kt2TsPluginExtension::class.java).outputFile!!.absolutePath!!
-        } catch (e: Exception) {
-            when (e) {
-                is UnknownDomainObjectException,
-                is NullPointerException -> "$buildDir/$fileName"
-                else -> throw e
-            }
-        }
-
-    private val classesURLs
-        get() =
-            getSourceFiles().map { it.toURI().toURL() }.toTypedArray()
+    private val fullPath get() = project.extensions.getByType(Kt2TsPluginExtension::class.java).outputFile!!.absolutePath!!
+    private val classesURLs get() = getSourceFiles().map { it.toURI().toURL() }.toTypedArray()
 
     init {
         description =
@@ -54,15 +26,8 @@ open class Kt2TsTask : DefaultTask() {
     }
 
     @InputFiles
-    fun getSourceFiles(): FileCollection = try {
+    fun getSourceFiles(): FileCollection =
         project.extensions.getByType(Kt2TsPluginExtension::class.java).classesDirs!!
-    } catch (e: Exception) {
-        when (e) {
-            is UnknownDomainObjectException,
-            is NullPointerException -> project.files(defaultInputs)
-            else -> throw e
-        }
-    }
 
     @OutputFile
     fun getOutput() = File(fullPath)
