@@ -4,6 +4,7 @@ Have your backend declare the data types (DTOs) for its API, and use em in the f
 Great when working with Angular or other TypeScript frameworks.
 
 [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/se/jensim/kt2ts/se.jensim.kt2ts.gradle.plugin/maven-metadata.xml.svg?colorB=007ec6&label=gradle-plugin)](https://plugins.gradle.org/plugin/se.jensim.kt2ts)
+[![Build Status](https://travis-ci.org/jensim/kt2ts-gradle-plugin.svg?branch=master)](https://travis-ci.org/jensim/kt2ts-gradle-plugin)
 
 ## Usage
 build.kotlin.kts

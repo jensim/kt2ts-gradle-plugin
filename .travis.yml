@@ -1,12 +1,17 @@
 language: java
 jdk: oraclejdk8
 
+env:
+  global:
+  - secure: GDG2FaLyWyO2flJH00MhppLFCRxGk/2nzY2VoYLcGSCNGjT5ZKZpT474AnJGsiLvjSZBvFK1wB8WW9BEnlCUDzUS5UzhUnJBz+SMgaz1m67SyPkm8fjr2MGkakrBtkKiyMZ94MlOUT9i6DMIK/RJPMS40W96ELRZ1SImylq6CIF/2miwogASZNKIXvEOq2JfL1+W3KmqLixSTtE8ig1k0POq8z30ruxnn2gO6UniOhtAmdf4WIsBj3FkErR9PEkFHIlUEg1VxIoMqWm7/BWkRoj+44TENG7I5l28v+46zwK3Ve4fNBoZyI4BZPHIzAbiOHD1kn+aAk2vb84jJxve/wic7DqCpBHCP7qYNk7r126SvMxERu7k+HB2/B7sqx1tZWFeA+W+wCZRV7TqrQnfRTSf39tQioBPW7OEj3I4azUBNSKE4Rlp9O14/P0zm0ob3kWIsWAZQ169pZOPRmOm8tY07bcytcq/t23/eBRPUXl074rA4oe4jeITWiJ9J3LBXBDU7jXXKqdB+1ppHxfdVRftjLRgQnKHJwSalkvpdtHUTMWnGFk+U6IAK1LXkW6PUZEh5a51foWXDzt0Fvn5x1SZfIegT8jrzvjIDNz0TbGsdwFQDmi/AZMdhQlx52IpJJUUpk4HEFQB0RmRwR1YOLmWY80q35SU+YrNDxkhnpw=
+  - secure: h+T93mTFC/BOxlics0EoeiIeDng7V/pgyfMN34rs017yNif4w5VXaE+YZe5k6+PwXBahkRwiiwo60m1cdN8tjefYCwX4wAwaSSX26dFKEcXPet+KYy3F4YLFyF1cNjFZUD65vC2CHQbLUiNG4jFMKjFpB10DIxItitmRBlrgiVSEvDlpWNfz66UujxmTBG/l7muqriGN4O2caWvuRb0v/Cm0HNjfoAMMK7AnrfF55CX3PiyQfNvmnqA9U9cUXYXRkIO5OEatOBhby+TqxM9+A3JIs0+QgxvCwJMoW1KXh5xqiYGmOwQrZdrsx+sz708EkrDnkvRPH56SodwO3/p65oBK1xSX7DEBVAiLy1oB7bDHOTWfnmbw2pCFXmuup6xh6HxUBVKWjenmwwgx4qckxoiuOu5T17aTwYIZBHyvEB1aYX9HwV9UYe7uaAkc23eUWLXH97/G2p0Jm4EuL5hZbd8JfL84cD8uQk3pBlug2Rrj4lfvTx2cZKY5nupeFMQqYEnWz9ADYArwAWfEOe1bMVVaHx3e3lwJYB95t3EuvzFZI1esIIzxmlZnoGX/7QqgLdHg1QCqBhAJ4UAjW5K8GGuUquikM/I7HGLZrs8AgKG75xjaxFPL8nFIXjIxpniml+XPrCYD8jotJ3enrxXu/8DW/lXJmdnNPbZ2i/s63H0=
+
 jobs:
   include:
-    - stage: "Build and test"
-      script: "./gradlew build"
-    - stage: "Publish to gradle portal"
-      script:
-        - echo -e "gradle.publish.key=$APIKEY\ngradle.publish.secret=$APISECRET" > $HOME_DIR/.gradle/gradle.properties
-        - "./gradlew -PreleaseVersion=$TRAVIS_TAG :publishPlugins"
-      if: "tag IS present"
+  - stage: Build and test
+    script: "./gradlew build"
+  - stage: Publish to gradle portal
+    script:
+    - echo -e "gradle.publish.key=$APIKEY\ngradle.publish.secret=$APISECRET" > $HOME_DIR/.gradle/gradle.properties
+    - "./gradlew -PreleaseVersion=$TRAVIS_TAG :publishPlugins"
+    if: tag IS present
