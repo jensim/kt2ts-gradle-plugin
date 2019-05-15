@@ -15,14 +15,7 @@ open class Kt2TsTask : DefaultTask() {
     private val classesURLs get() = getSourceFiles().map { it.toURI().toURL() }.toTypedArray()
 
     init {
-        description =
-            "Generate typescript definitions from Kotlin files annotated with the magic word Kotlin2Typescript"
-        dependsOn(
-            listOfNotNull(
-                project.tasks.findByName("compileKotlin"),
-                project.tasks.findByName("compileJava")
-            )
-        )
+        description = "Generate typescript definitions from Kotlin files annotated with the magic word Kotlin2Typescript"
     }
 
     @InputFiles
