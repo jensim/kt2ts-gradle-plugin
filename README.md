@@ -46,6 +46,7 @@ enum class FouthEnum {
 ## Dependencies and licence stuff
 | Dependency             | Licence                                                      |
 |------------------------|--------------------------------------------------------------|
+| kt2ts (this)           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
 | ts-generator           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
 | reflections            | [WTFPL](http://www.wtfpl.net/)                               |
 | javassist (transitive) | [MOZILLA PUBLIC LICENSE](https://www.mozilla.org/en-US/MPL/) |                                   
