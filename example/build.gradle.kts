@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.31"
-    id("se.jensim.kt2ts") version "0.4.0"
+    id("se.jensim.kt2ts") version "0.5.6"
 }
 
 repositories {
@@ -21,23 +21,6 @@ kt2ts {
         tasks.findByName("compileJava")?.outputs
     )
     outputFile = file("$buildDir/ts/kt2ts.d.ts")
-}
-
-tasks.findByName("kt2ts")?.apply {
-    dependsOn(
-        listOfNotNull(
-            tasks.findByName("compileJava"),
-            tasks.findByName("compileKotlin")
-        )
-    )
-}
-
-tasks.findByName("test")?.apply {
-    dependsOn(
-        listOfNotNull(
-            tasks.findByName("kt2ts")
-        )
-    )
 }
 
 tasks.withType<KotlinCompile> {
