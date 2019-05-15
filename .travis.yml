@@ -9,10 +9,16 @@ env:
 jobs:
   include:
   - stage: Build and test
-    script: "./gradlew build"
+    script:
+      - "./gradlew build publish"
+      - "cd example"
+      - "./gradlew -b dev.build.gradle.kts build"
     if: tag IS blank
   - stage: Publish to gradle portal
     script:
-      - "./gradlew build"
+      - "./gradlew build publish"
+      - "cd example"
+      - "./gradlew -b dev.build.gradle.kts build"
+      - "cd .."
       - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
     if: tag IS present
