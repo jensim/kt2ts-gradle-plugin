@@ -7,12 +7,8 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import org.reflections.Reflections
-import java.io.File
 
 open class Kt2TsTask : DefaultTask() {
-
-    private val fullPath get() = project.extensions.getByType(Kt2TsPluginExtension::class.java).outputFile!!.absolutePath!!
-    private val classesURLs get() = getSourceFiles().map { it.toURI().toURL() }.toTypedArray()
 
     init {
         description = "Generate typescript definitions from Kotlin files annotated with the magic word Kotlin2Typescript"
@@ -20,33 +16,48 @@ open class Kt2TsTask : DefaultTask() {
 
     @InputFiles
     fun getSourceFiles(): FileCollection =
-        project.extensions.getByType(Kt2TsPluginExtension::class.java).classesDirs!!
+        project.extensions.getByType(Kt2TsPluginExtension::class.java).classesDirs
+            ?: throw Kt2TsException("No classesDirs defined in kt2ts config extension.")
 
     @OutputFile
-    fun getOutput() = File(fullPath)
+    fun getOutput() = project.extensions.getByType(Kt2TsPluginExtension::class.java).outputFile
+        ?: throw Kt2TsException("No outputFile defined in kt2ts config extension.")
 
     @TaskAction
     open fun generateTypescript() {
+        val annotatedClasses = getAnnotatedClasses()
+        val ts = generateTypescript(annotatedClasses)
+        write(ts)
+    }
+
+    private fun getAnnotatedClasses(): Set<Class<*>> {
+        if (getSourceFiles().isEmpty) {
+            throw Kt2TsException("Unable to find source files")
+        }
         val extension = project.extensions.getByType(Kt2TsPluginExtension::class.java)
+        val classesURLs = getSourceFiles()
+            .map { it.toURI().toURL() }
+            .toTypedArray()
 
         val classLoader = java.net.URLClassLoader(classesURLs)
         val annotation = try {
             classLoader.loadClass(extension.annotation) as Class<Annotation>
         } catch (e: Exception) {
-            throw RuntimeException("Bad choise of annotation", e)
+            throw Kt2TsException("Bad choise of annotation", e)
         }
 
         val reflections = Reflections(classLoader)
-        val annotated = reflections.getTypesAnnotatedWith(annotation, false)
+        return reflections.getTypesAnnotatedWith(annotation, true)
+    }
 
-        val tsParts = TypeScriptGenerator(
-            rootClasses = annotated.mapNotNull { it.kotlin }
-        ).individualDefinitions
-        val ts = tsParts.joinToString("\n\n") { "export $it" }
+    private fun generateTypescript(classes: Set<Class<*>>): String = TypeScriptGenerator(
+        rootClasses = classes.map { it.kotlin }
+    ).individualDefinitions.joinToString("\n\n") { "export $it" }
 
+    private fun write(data: String) {
         val output = getOutput()
         val dir = output.parentFile
         dir.mkdirs()
-        output.writeText(ts)
+        output.writeText(data)
     }
 }

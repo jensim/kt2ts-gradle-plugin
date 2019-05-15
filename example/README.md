@@ -1,5 +1,7 @@
-# Dev
+# Example 
+
+## Dev
 
 ```bash
-./gradlew -b dev.build.gradle.kts :kt2ts
+./gradlew -b dev.build.gradle.kts build --stacktrace --rerun-tasks
 ```
