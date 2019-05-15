@@ -43,12 +43,12 @@ enum class FouthEnum {
 
 ```
 
-## Dependencies and licence stuff
-| Dependency             | Licence                                                      |
-|------------------------|--------------------------------------------------------------|
-| kt2ts (this)           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
-| ts-generator           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
-| reflections            | [WTFPL](http://www.wtfpl.net/)                               |
-| javassist (transitive) | [MOZILLA PUBLIC LICENSE](https://www.mozilla.org/en-US/MPL/) |                                   
-| guava (transitive)     | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |                                   
+## Dependencies and license stuff
+| Dependency                                                             | License                                                      |
+|------------------------------------------------------------------------|--------------------------------------------------------------|
+| kt2ts (this)                                                           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
+| [ts-generator](https://github.com/ntrrgc/ts-generator)                 | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
+| [reflections](https://github.com/ronmamo/reflections)                  | [WTFPL](http://www.wtfpl.net/)                               |
+| [javassist](https://github.com/jboss-javassist/javassist) (transitive) | [MOZILLA PUBLIC LICENSE](https://www.mozilla.org/en-US/MPL/) |                                   
+| [guava](https://github.com/google/guava) (transitive)                  | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |                                   
 
