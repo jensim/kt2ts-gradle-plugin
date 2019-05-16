@@ -15,19 +15,19 @@ jobs:
   include:
   - stage: Build and test
     script:
-      - "./gradlew build publish"
+      - "./gradlew build publish --stacktrace"
       - "cd example"
-      - "./gradlew -b dev.build.gradle.kts build"
+      - "./gradlew -b dev.build.gradle.kts build --stacktrace"
       - "cd .."
-      - "./gradlew sonarqube"
+      - "./gradlew sonarqube --stacktrace"
       - "cd example"
-      - "./gradlew sonarqube"
+      - "./gradlew sonarqube --stacktrace"
     if: tag IS blank
   - stage: Publish to gradle portal
     script:
-      - "./gradlew build publish"
+      - "./gradlew build publish --stacktrace"
       - "cd example"
-      - "./gradlew -b dev.build.gradle.kts build"
+      - "./gradlew -b dev.build.gradle.kts build --stacktrace"
       - "cd .."
-      - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
+      - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins --stacktrace"
     if: tag IS present
