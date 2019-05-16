@@ -58,3 +58,9 @@ enum class FouthEnum {
 ## Why?
 Because we need something like kt2js
 https://youtrack.jetbrains.com/issue/KT-16604
+
+## Tests
+0% coverage in the plugin
+
+We build and test the example project that uses the plugin.
+At least it's something.
