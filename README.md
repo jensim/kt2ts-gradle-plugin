@@ -13,7 +13,7 @@ This project is a wrapper around the [ts-generator](https://github.com/ntrrgc/ts
 
 ## Usage
 build.kotlin.kts
-```kotlin
+```gradle
 plugins {
     id("se.jensim.kt2ts") version "$pluginVersion"
 }
