@@ -4,6 +4,7 @@ import org.gradle.testkit.runner.GradleRunner
 import org.hamcrest.Matchers.greaterThan
 import org.junit.Assert
 import org.junit.Assert.assertThat
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -39,6 +40,7 @@ class FuncTest {
         assertThat(readText.length, greaterThan(0))
     }
 
+    @Ignore("Only works after publish to local maven repo")
     @Test
     fun `func test local version`() {
         // given
