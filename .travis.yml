@@ -17,7 +17,7 @@ jobs:
     script:
       - "./gradlew build publish sonarqube --stacktrace"
       - "cd example"
-      - "./gradlew -b dev.build.gradle.kts build sonarqube --stacktrace"
+      - "./gradlew -b dev.build.gradle.kts build --stacktrace"
     if: tag IS blank
   - stage: Publish to gradle portal
     script:
