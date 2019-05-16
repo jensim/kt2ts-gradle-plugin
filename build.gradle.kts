@@ -49,13 +49,13 @@ tasks.withType<KotlinCompile> {
 
 pluginBundle {
     description = """
-Generate TypeScript Definitions from your existing code. 
+Generate TypeScript Definitions from your existing code.
 
 In case you have your backend written in kotlin or java and you dont want to write your Angular type definitions yourself.
 """
     website = "https://github.com/jensim/kt2ts-gradle-plugin/blob/${project.version}/README.md"
     vcsUrl = "https://github.com/jensim/kt2ts-gradle-plugin"
-    tags = listOf("kotlin", "typescript", "kt2ts", "kt2js", "generate", "definitions", "ts-generator", "angular")
+    tags = listOf("kotlin", "typescript", "kt2ts", "kt2js", "generate", "definitions", "ts-generator", "angular", "ts", "kt", "transpile")
 }
 
 gradlePlugin {
