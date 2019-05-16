@@ -16,16 +16,18 @@ jobs:
   - stage: Build and test
     script:
       - "./gradlew build publish"
-      - cd example
+      - "cd example"
       - "./gradlew -b dev.build.gradle.kts build"
-      - cd ..
+      - "cd .."
+      - "./gradlew sonarqube"
+      - "cd example"
       - "./gradlew sonarqube"
     if: tag IS blank
   - stage: Publish to gradle portal
     script:
       - "./gradlew build publish"
-      - cd example
+      - "cd example"
       - "./gradlew -b dev.build.gradle.kts build"
-      - cd ..
+      - "cd .."
       - "./gradlew -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins"
     if: tag IS present
