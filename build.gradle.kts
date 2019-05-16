@@ -34,6 +34,7 @@ dependencies {
     implementation("org.reflections:reflections:0.9.11")
 
     testImplementation(kotlin("test-junit"))
+    testImplementation("org.hamcrest:hamcrest-core:2.1")
 }
 
 tasks.withType<Jar> {
