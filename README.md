@@ -12,7 +12,7 @@ This project is a wrapper around the [ts-generator](https://github.com/ntrrgc/ts
 build.kotlin.kts
 ```kotlin
 plugins {
-    id("se.jensim.kt2ts") version "0.4.0"
+    id("se.jensim.kt2ts") version "$pluginVersion"
 }
 
 kt2ts {
