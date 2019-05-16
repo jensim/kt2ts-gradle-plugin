@@ -28,7 +28,9 @@ version = findProperty("releaseVersion") ?: "DEV"
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(gradleApi())
-    compileOnly("com.github.ntrrgc:ts-generator:1.1.1")
+    compileOnly("com.github.ntrrgc:ts-generator:1.1.1") {
+        exclude(group = "org.jetbrains.kotlin")
+    }
     implementation("org.reflections:reflections:0.9.11")
 
     testImplementation(kotlin("test-junit"))

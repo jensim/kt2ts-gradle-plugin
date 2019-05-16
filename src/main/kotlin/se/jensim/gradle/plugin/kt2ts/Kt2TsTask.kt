@@ -41,6 +41,7 @@ open class Kt2TsTask : DefaultTask() {
 
         val classLoader = java.net.URLClassLoader(classesURLs)
         val annotation = try {
+            @Suppress("UNCHECKED_CAST")
             classLoader.loadClass(extension.annotation) as Class<Annotation>
         } catch (e: Exception) {
             throw Kt2TsException("Bad choise of annotation", e)
