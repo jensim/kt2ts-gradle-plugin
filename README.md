@@ -1,4 +1,4 @@
-# Kotlin to TypeScript
+# Kotlin to TypeScript gradle-plugin
 
 Have your backend declare the data types (DTOs) for its API, and use em in the front end.
 Great when working with Angular or other TypeScript frameworks.
