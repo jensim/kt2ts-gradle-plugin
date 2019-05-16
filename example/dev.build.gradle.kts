@@ -15,7 +15,7 @@ buildscript {
 apply(plugin = "se.jensim.kt2ts")
 plugins {
     kotlin("jvm") version "1.3.31"
-    id("org.sonarqube") version "2.7"
+    id("org.sonarqube") version "2.7.1"
 }
 repositories {
     mavenCentral()
