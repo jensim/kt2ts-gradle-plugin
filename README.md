@@ -8,6 +8,7 @@ This project is a wrapper around the [ts-generator](https://github.com/ntrrgc/ts
 [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/se/jensim/kt2ts/se.jensim.kt2ts.gradle.plugin/maven-metadata.xml.svg?colorB=007ec6&label=gradle-plugin)](https://plugins.gradle.org/plugin/se.jensim.kt2ts)
 [![Build Status](https://travis-ci.org/jensim/kt2ts-gradle-plugin.svg?branch=master)](https://travis-ci.org/jensim/kt2ts-gradle-plugin)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=se.jensim.kt2ts%3Akt2ts-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=se.jensim.kt2ts%3Akt2ts-plugin)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=se.jensim.kt2ts%3Akt2ts-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=se.jensim.kt2ts%3Akt2ts-plugin)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=se.jensim.kt2ts%3Akt2ts-plugin&metric=ncloc)](https://sonarcloud.io/dashboard?id=se.jensim.kt2ts%3Akt2ts-plugin)
 
 ## Usage
