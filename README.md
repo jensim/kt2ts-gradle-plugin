@@ -44,11 +44,11 @@ enum class FouthEnum {
 ```
 
 ## Dependencies and license stuff
-| Dependency                                                             | License                                                      |
-|------------------------------------------------------------------------|--------------------------------------------------------------|
-| kt2ts (this)                                                           | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
-| [ts-generator](https://github.com/ntrrgc/ts-generator)                 | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |
-| [reflections](https://github.com/ronmamo/reflections)                  | [WTFPL](http://www.wtfpl.net/)                               |
-| [javassist](https://github.com/jboss-javassist/javassist) (transitive) | [MOZILLA PUBLIC LICENSE](https://www.mozilla.org/en-US/MPL/) |                                   
-| [guava](https://github.com/google/guava) (transitive)                  | [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)     |                                   
+| Dependency                                                             | License                                                                                                                        |
+|------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| kt2ts (this)                                                           | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)           |
+| [ts-generator](https://github.com/ntrrgc/ts-generator)                 | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)           |
+| [reflections](https://github.com/ronmamo/reflections)                  | [![WTFPL](https://img.shields.io/badge/license-WTFPL-orange.svg)](http://www.wtfpl.net/)                                                                                                 |
+| [javassist](https://github.com/jboss-javassist/javassist) (transitive) | [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0) |                                   
+| [guava](https://github.com/google/guava) (transitive)                  | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)           |                                   
 
