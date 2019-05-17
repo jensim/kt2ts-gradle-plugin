@@ -14,8 +14,8 @@ addons:
 jobs:
   include:
   - stage: Build and test
-    script: "./gradlew build publish sonarqube --stacktrace"
+    script: "./gradlew build sonarqube --stacktrace"
     if: tag IS blank
   - stage: Publish to gradle portal
-    script: "./gradlew build publish -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins --stacktrace"
+    script: "./gradlew build -PreleaseVersion=$TRAVIS_TAG -Pgradle.publish.key=$APIKEY -Pgradle.publish.secret=$APISECRET :publishPlugins --stacktrace"
     if: tag IS present
