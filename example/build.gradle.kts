@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.31"
-    id("se.jensim.kt2ts") version "0.7.8-rc3"
+    id("se.jensim.kt2ts") version "0.7.8"
 }
 
 repositories {
