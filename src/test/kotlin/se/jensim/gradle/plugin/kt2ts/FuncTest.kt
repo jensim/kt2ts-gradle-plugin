@@ -2,8 +2,8 @@ package se.jensim.gradle.plugin.kt2ts
 
 import org.gradle.testkit.runner.GradleRunner
 import org.hamcrest.Matchers.greaterThan
-import org.junit.Assert
 import org.junit.Assert.assertThat
+import org.junit.Assert.assertTrue
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -16,50 +16,52 @@ class FuncTest {
     @Rule
     val tempFolder = TemporaryFolder()
 
-    //@Ignore("This test depends on published version of the gradle plugin and therefore cannot be trusted entirely
-    // any breaking change will make this test fail.")
+    //@Ignore("This test depends on published version of the gradle plugin and therefore cannot be trusted entirely any breaking change will make this test fail.")
     @Test
     fun `func test plugin portal version`() {
         // given
-        val src = tempFolder.newFolder("src")
-        File("example/src").copyRecursively(src)
-        val buildFile = tempFolder.newFile("build.gradle.kts")
-        buildFile.writeText(File("example/build.gradle.kts").readText())
+        setUp("build.gradle.kts")
 
         // when
-        val runner = GradleRunner.create().apply {
-            withProjectDir(tempFolder.root)
-            withArguments("build")
-        }
-        runner.build()
+        run("build")
 
         // then
-        val output = File(tempFolder.root, "build/ts/kt2ts.d.ts")
-        Assert.assertTrue(output.exists())
-        val readText = output.readText()
-        assertThat(readText.length, greaterThan(0))
+        verifyOutput()
     }
 
     @Ignore("Only works after publish to local maven repo")
     @Test
     fun `func test local version`() {
         // given
+        setUp("dev.build.gradle.kts")
+
+        //when
+        run("build") {
+            withPluginClasspath()
+        }
+
+        //then
+        verifyOutput()
+    }
+
+    private fun setUp(gradleFile: String) {
         val src = tempFolder.newFolder("src")
         File("example/src").copyRecursively(src)
         val buildFile = tempFolder.newFile("build.gradle.kts")
-        buildFile.writeText(File("example/dev.build.gradle.kts").readText())
+        buildFile.writeText(File("example/$gradleFile").readText())
+    }
 
-        //when
-        val runner = GradleRunner.create().apply {
+    private fun run(vararg arguments: String, additionalConfig: GradleRunner.() -> Unit = {}) {
+        GradleRunner.create().apply {
             withProjectDir(tempFolder.root)
-            withArguments("build")
-            withPluginClasspath()
-        }
-        runner.build()
+            withArguments(*arguments.asList().plus(listOf("--stacktrace", "--info")).toTypedArray())
+            additionalConfig()
+        }.build()
+    }
 
-        //then
+    private fun verifyOutput() {
         val output = File(tempFolder.root, "build/ts/kt2ts.d.ts")
-        Assert.assertTrue(output.exists())
+        assertTrue(output.exists())
         val readText = output.readText()
         assertThat(readText.length, greaterThan(0))
     }

@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import se.jensim.gradle.plugin.kt2ts.kt2ts
 
 buildscript {
@@ -21,7 +20,6 @@ repositories {
 }
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-
     testImplementation(kotlin("test-junit"))
 }
 
