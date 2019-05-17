@@ -54,7 +54,7 @@ class FuncTest {
     private fun run(vararg arguments: String, additionalConfig: GradleRunner.() -> Unit = {}) {
         GradleRunner.create().apply {
             withProjectDir(tempFolder.root)
-            withArguments(*arguments.asList().plus(listOf("--stacktrace", "--info")).toTypedArray())
+            withArguments(arguments.asList().plus(listOf("--stacktrace", "--info")))
             additionalConfig()
         }.build()
     }
