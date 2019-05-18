@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import se.jensim.gradle.plugin.kt2ts.kt2ts
 
 buildscript {
