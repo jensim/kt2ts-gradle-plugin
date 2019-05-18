@@ -4,7 +4,7 @@ import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Assert
 import org.junit.Test
 
-class Kt2TsPluginTest  {
+class Kt2TsPluginTest {
 
     @Test
     fun `create project`() {

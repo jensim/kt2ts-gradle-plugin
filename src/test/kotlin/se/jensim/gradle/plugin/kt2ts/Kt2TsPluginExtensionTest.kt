@@ -4,9 +4,7 @@ import com.nhaarman.mockitokotlin2.*
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.hasSize
-import org.junit.Assert
 import org.junit.Assert.assertThat
 import org.junit.Test
 import java.io.File

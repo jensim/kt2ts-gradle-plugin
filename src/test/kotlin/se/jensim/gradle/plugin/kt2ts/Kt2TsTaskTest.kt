@@ -1,15 +1,13 @@
 package se.jensim.gradle.plugin.kt2ts
 
 import org.gradle.testfixtures.ProjectBuilder
-import org.gradle.testkit.runner.GradleRunner
-import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import java.io.File
 
-class Kt2TsTaskTest{
+class Kt2TsTaskTest {
 
     @JvmField
     @Rule

@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 
 internal class TypeScriptWriter(private val destination: File) {
 
-    fun write(classes:Set<KClass<*>>){
+    fun write(classes: Set<KClass<*>>) {
         val ts = TypeScriptGenerator(
             rootClasses = classes
         ).individualDefinitions.joinToString("\n\n") { "export $it" }
