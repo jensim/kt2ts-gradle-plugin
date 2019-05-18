@@ -16,10 +16,12 @@ plugins {
     `java-gradle-plugin`
     id("org.sonarqube") version "2.7.1"
     id("com.gradle.plugin-publish") version "0.10.0"
+    jacoco
 }
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
+    jcenter()
 }
 
 group = "se.jensim.kt2ts"
@@ -34,7 +36,10 @@ dependencies {
     implementation("org.reflections:reflections:0.9.11")
 
     testImplementation(kotlin("test-junit"))
+    testImplementation(kotlin("reflect"))
+    testImplementation("com.github.ntrrgc:ts-generator:1.1.1")
     testImplementation("org.hamcrest:hamcrest-core:2.1")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
 }
 
 tasks.withType<Jar> {
@@ -78,5 +83,13 @@ gradlePlugin {
 publishing {
     repositories {
         mavenLocal()
+    }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        csv.isEnabled = false
+        html.destination = file("$buildDir/jacocoHtml")
     }
 }
