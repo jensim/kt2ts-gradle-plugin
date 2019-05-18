@@ -23,7 +23,7 @@ internal class ClassFinder(private val sourceFiles: Set<File>) {
             @Suppress("UNCHECKED_CAST")
             classLoader.loadClass(annotationClassRef) as Class<Annotation>
         } catch (e: Exception) {
-            throw Kt2TsException("Bad choise of annotation", e)
+            throw Kt2TsException("Bad choice of annotation", e)
         }
 
         val reflections = Reflections(classLoader)
