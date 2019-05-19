@@ -5,7 +5,7 @@ import java.io.File
 import java.net.URLClassLoader
 import kotlin.reflect.KClass
 
-internal class ClassFinder(private val sourceFiles: Set<File>) {
+internal class DefaultClassFinder(private val sourceFiles: Set<File>) : ClassFinder {
 
     private val classLoader: ClassLoader by lazy {
         if (sourceFiles.isEmpty()) {
@@ -18,7 +18,7 @@ internal class ClassFinder(private val sourceFiles: Set<File>) {
         URLClassLoader(classesURLs)
     }
 
-    fun getAnnotatedClasses(annotationClassRef: String): Set<KClass<*>> {
+    override fun getAnnotatedClasses(annotationClassRef: String): Set<KClass<*>> {
         val annotation = try {
             @Suppress("UNCHECKED_CAST")
             classLoader.loadClass(annotationClassRef) as Class<Annotation>

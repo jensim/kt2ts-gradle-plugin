@@ -9,13 +9,16 @@ import java.io.File
 import kotlin.test.assertFailsWith
 import kotlin.test.assertSame
 
-class ClassFinderTest {
+class DefaultClassFinderTest {
+
+    private val classPath = "build/classes/kotlin/test/se/jensim/gradle/plugin/kt2ts/internal/classfilefindertest"
 
     @Test
     fun `find annotated test class`() {
         // given
-        val sourceFiles = setOf(File("build/classes/main/kotlin/"))
-        val finder = ClassFinder(sourceFiles)
+        val sourceFiles =
+            setOf(File(classPath))
+        val finder = DefaultClassFinder(sourceFiles)
         val annotation = AnnotationToFind::class
 
         // when
@@ -29,8 +32,8 @@ class ClassFinderTest {
     @Test
     fun `bad annotation`() {
         // given
-        val sourceFiles = setOf(File("build/classes/main/kotlin/"))
-        val finder = ClassFinder(sourceFiles)
+        val sourceFiles = setOf(File(classPath))
+        val finder = DefaultClassFinder(sourceFiles)
 
         // when
         assertFailsWith<Kt2TsException> {
@@ -42,7 +45,7 @@ class ClassFinderTest {
     fun `bad source`() {
         // given
         val sourceFiles = emptySet<File>()
-        val finder = ClassFinder(sourceFiles)
+        val finder = DefaultClassFinder(sourceFiles)
         val annotation = AnnotationToFind::class
 
         // when
