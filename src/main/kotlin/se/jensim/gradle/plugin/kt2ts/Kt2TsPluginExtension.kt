@@ -12,6 +12,7 @@ open class Kt2TsPluginExtension {
 }
 
 fun Project.kt2ts(config: Kt2TsPluginExtension.() -> Unit) {
+    @Suppress("UnstableApiUsage")
     extensions.configure("kt2ts", config)
 }
 
