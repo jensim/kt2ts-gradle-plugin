@@ -9,7 +9,7 @@ import org.junit.rules.TemporaryFolder
 import se.jensim.gradle.plugin.kt2ts.internal.classfilefindertest.ClassToFind
 import java.io.File
 
-class DefaultTypeScriptWriterTest {
+class Kt2TsTypeScriptWriterImplTest {
 
     @JvmField
     @Rule
@@ -18,9 +18,11 @@ class DefaultTypeScriptWriterTest {
     @Test
     fun `write typescript to file`() {
         val destination = File(tempFolder.root, "output.d.ts")
+        val classes = setOf(ClassToFind::class)
+        val input = mapOf(destination to classes)
         assertFalse(destination.exists())
 
-        DefaultTypeScriptWriter(destination).write(setOf(ClassToFind::class))
+        Kt2TsTypeScriptWriterImpl().write(input)
 
         assertTrue(destination.exists())
         assertThat(destination.readText(), not(emptyString()))

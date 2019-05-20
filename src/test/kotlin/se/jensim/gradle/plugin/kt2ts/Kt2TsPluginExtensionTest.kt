@@ -14,17 +14,22 @@ class Kt2TsPluginExtensionTest {
     @Test
     fun `kt2ts extension func`() {
         // given
-        val setter: Kt2TsPluginExtension.() -> Unit = {
-            annotation = "foo.bar"
-            outputFile = File("/")
-        }
         val mockExtension: ExtensionContainer = mock()
         val mockProject: Project = mock {
             on { extensions } doReturn mockExtension
         }
 
         // when
-        mockProject.kt2ts(setter)
+        mockProject.kt2ts {
+            classFilesSources {
+                this.classesDirs = mock()
+            }
+            generationSpecification {
+                this.annotations = listOf("foo.bar")
+                this.outputFile = File("./ts.d.ts")
+            }
+        }
+
 
         // then
         verify(mockExtension).configure(eq("kt2ts"), any<Action<Kt2TsPluginExtension>>())
@@ -33,14 +38,25 @@ class Kt2TsPluginExtensionTest {
     @Test
     fun `Kt2TsPluginExtension is mutable`() {
         val extension = Kt2TsPluginExtension()
-        val settings = listOf({ extension.outputFile }, { extension.classesDirs }, { extension.annotation })
+        val settings: List<() -> Any?> =
+            listOf(
+                { extension.generationSpecifications.firstOrNull()?.outputFile },
+                { extension.generationSpecifications.firstOrNull()?.annotations },
+                { extension.classFilesSources.compileTasks },
+                { extension.classFilesSources.classesDirs }
+            )
 
         assertThat(settings.mapNotNull { it.invoke() }, hasSize(0))
 
-        extension.outputFile = File("/")
-        extension.classesDirs = mock()
-        extension.annotation = "foo"
+        extension.generationSpecification {
+            outputFile = File("./")
+            annotations = listOf("foo")
+        }
+        extension.classFilesSources {
+            classesDirs = mock()
+            compileTasks = mock()
+        }
 
-        assertThat(settings.mapNotNull { it.invoke() }, hasSize(3))
+        assertThat(settings.mapNotNull { it.invoke() }, hasSize(4))
     }
 }

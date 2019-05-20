@@ -9,7 +9,7 @@ import java.io.File
 import kotlin.test.assertFailsWith
 import kotlin.test.assertSame
 
-class DefaultClassFinderTest {
+class Kt2TsClassFinderImplTest {
 
     private val classPath = "build/classes/kotlin/test/se/jensim/gradle/plugin/kt2ts/internal/classfilefindertest"
 
@@ -18,26 +18,29 @@ class DefaultClassFinderTest {
         // given
         val sourceFiles =
             setOf(File(classPath))
-        val finder = DefaultClassFinder(sourceFiles)
+        val finder = Kt2TsClassFinderImpl(sourceFiles)
         val annotation = AnnotationToFind::class
 
         // when
-        val c = finder.getAnnotatedClasses(annotation.qualifiedName!!)
+        val c = finder.mapAnnotationsToAnnotatedClasses(
+            setOf(annotation.qualifiedName!!))
 
         // then
-        assertThat(c, hasSize(1))
-        assertSame(c.first(), SecondClassToFind::class)
+        assertThat (c.keys, hasSize(1))
+        assertThat(c.values.first(), hasSize(1))
+        val expected = c.values.first().first()
+        assertSame(expected, SecondClassToFind::class)
     }
 
     @Test
     fun `bad annotation`() {
         // given
         val sourceFiles = setOf(File(classPath))
-        val finder = DefaultClassFinder(sourceFiles)
+        val finder = Kt2TsClassFinderImpl(sourceFiles)
 
         // when
         assertFailsWith<Kt2TsException> {
-            finder.getAnnotatedClasses("foo.bar")
+            finder.mapAnnotationsToAnnotatedClasses(setOf("foo.bar"))
         }
     }
 
@@ -45,12 +48,12 @@ class DefaultClassFinderTest {
     fun `bad source`() {
         // given
         val sourceFiles = emptySet<File>()
-        val finder = DefaultClassFinder(sourceFiles)
+        val finder = Kt2TsClassFinderImpl(sourceFiles)
         val annotation = AnnotationToFind::class
 
         // when
         assertFailsWith<Kt2TsException> {
-            finder.getAnnotatedClasses(annotation.qualifiedName!!)
+            finder.mapAnnotationsToAnnotatedClasses(setOf(annotation.qualifiedName!!))
         }
     }
 }
