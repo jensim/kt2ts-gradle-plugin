@@ -29,7 +29,7 @@ class FuncTest {
         verifyOutput()
     }
 
-    //@Ignore("Only works after publish to local maven repo")
+    @Ignore("Only works after publish to local maven repo")
     @Test
     fun `func test local version`() {
         // given
