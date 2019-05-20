@@ -29,12 +29,13 @@ kt2ts {
         outputFile = file("$buildDir/ts/kt2ts.d.ts")
         annotations = listOf("com.example.ToTypescript")
     }
-    addGenerationSpecification {
+    generationSpecification {
         annotations = listOf("com.example.MyJavaAnnotation")
         outputFile = file("$buildDir/ts/java-only.d.ts")
     }
     classFilesSources {
         compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
+        classesDirs = files("$buildDir/classes/kotlin/main")
     }
 }
 

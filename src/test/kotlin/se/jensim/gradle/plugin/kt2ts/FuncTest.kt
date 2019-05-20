@@ -16,7 +16,7 @@ class FuncTest {
     @Rule
     val tempFolder = TemporaryFolder()
 
-    //@Ignore("This test depends on published version of the gradle plugin and therefore cannot be trusted entirely any breaking change will make this test fail.")
+    @Ignore("This test depends on published version of the gradle plugin and therefore cannot be trusted entirely any breaking change will make this test fail.")
     @Test
     fun `func test plugin portal version`() {
         // given

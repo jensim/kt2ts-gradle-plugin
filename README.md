@@ -19,11 +19,17 @@ plugins {
 }
 
 kt2ts {
-    annotation = "com.example.ToTypescript"
-    classesDirs = files(
-            tasks.findByName("compileKotlin")?.outputs,
-            tasks.findByName("compileJava")?.outputs)
-    outputFile = file("$buildDir/ts/kt2ts.d.ts")
+    // Repeatable block for linking outputfile to a set of annotations
+    generationSpecification {
+        outputFile = file("$buildDir/ts/kt2ts.d.ts")
+        annotations = listOf("com.example.ToTypescript")
+    }
+    classFilesSources {
+        // Two ways of setting classes dir, if both are set, both are jointly used
+        // One of the two must be set
+        compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
+        classesDirs = files("$buildDir/classes/kotlin/main")
+    }
 }
 ```
 

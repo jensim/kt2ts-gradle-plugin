@@ -57,30 +57,11 @@ open class Kt2TsPluginExtension {
      * }
      * </pre>
      */
-    fun addGenerationSpecification(config: GenerationSpecification.() -> Unit) {
-        val element = GenerationSpecification().apply(config)
-        require(element.outputFile != null) { "addGenerationSpecification.outputFile is required" }
-        require(element.annotations?.isNotEmpty() == true) { "addGenerationSpecification.annotations is required" }
-        generationSpecifications.add(element)
-    }
-
-    /**
-     * <pre>
-     * {@code
-     * kt2ts {
-     *   generationSpecification {
-     *     outputFile = file("$buildDir/ts/kt2ts.d.ts")
-     *     annotations = listOf("com.example.MyAnnotation")
-     *   }
-     * }
-     * }
-     * </pre>
-     */
     fun generationSpecification(config: GenerationSpecification.() -> Unit) {
         val element = GenerationSpecification().apply(config)
         require(element.outputFile != null) { "addGenerationSpecification.outputFile is required" }
         require(element.annotations?.isNotEmpty() == true) { "addGenerationSpecification.annotations is required" }
-        generationSpecifications = arrayListOf(element)
+        generationSpecifications.add(element)
     }
 
     /**
