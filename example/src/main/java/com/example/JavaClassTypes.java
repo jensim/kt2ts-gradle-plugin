@@ -2,6 +2,7 @@ package com.example;
 
 import java.util.Objects;
 
+@MyJavaAnnotation
 @ToTypescript
 public class JavaClassTypes {
     private final String name;

@@ -22,4 +22,20 @@ class TypeScriptVerificationTest {
         assertTrue(content.contains("FouthEnum"))
         assertTrue(content.contains("JavaClassTypes"))
     }
+
+    @Test
+    fun `verify that a java-only typescript file has been created and is not empty`() {
+        val file = File("build/ts/java-only.d.ts")
+        val exists = file.exists()
+
+        assertTrue(exists)
+
+        val content = file.readText()
+
+        assertFalse(content.contains("OneDataType"))
+        assertFalse(content.contains("TwoDataType"))
+        assertFalse(content.contains("ThreeDataType"))
+        assertFalse(content.contains("FouthEnum"))
+        assertTrue(content.contains("JavaClassTypes"))
+    }
 }
