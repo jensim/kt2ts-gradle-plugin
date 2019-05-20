@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.31"
-    id("se.jensim.kt2ts") version "0.7.8"
+    id("se.jensim.kt2ts") version "0.9.0"
 }
 
 repositories {
@@ -15,12 +15,18 @@ dependencies {
 }
 
 kt2ts {
-    annotation = "com.example.ToTypescript"
-    classesDirs = files(
-        tasks.findByName("compileKotlin")?.outputs,
-        tasks.findByName("compileJava")?.outputs
-    )
-    outputFile = file("$buildDir/ts/kt2ts.d.ts")
+    generationSpecification {
+        outputFile = file("$buildDir/ts/kt2ts.d.ts")
+        annotations = listOf("com.example.ToTypescript")
+    }
+    generationSpecification {
+        annotations = listOf("com.example.MyJavaAnnotation")
+        outputFile = file("$buildDir/ts/java-only.d.ts")
+    }
+    classFilesSources {
+        compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
+        classesDirs = files("$buildDir/classes/kotlin/main")
+    }
 }
 
 tasks.withType<KotlinCompile> {
