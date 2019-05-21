@@ -91,9 +91,10 @@ open class Kt2TsPluginExtension {
             }
         }
 
-    private fun Project.safeGetTaskOutputs(name: String): List<File>? = try {
-        project.tasks.findByName(name)?.outputs?.files?.files?.toList()
+    private fun Project?.safeGetTaskOutputs(name: String): List<File>? = try {
+        this?.tasks?.findByName(name)?.outputs?.files?.files?.toList()
     } catch (e: Exception) {
+        e.printStackTrace() //TODO
         emptyList()
     }
 
@@ -140,11 +141,6 @@ open class Kt2TsPluginExtension {
          * }</code>
          */
         var compileTasks: List<TaskProvider<*>>? = null
-
-        fun reset() {
-            classesDirs = null
-            compileTasks = null
-        }
     }
 
     class GenerationSpecification {
