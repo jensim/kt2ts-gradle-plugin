@@ -27,7 +27,7 @@ kt2ts {
     }
     classFilesSources {
         // Two ways of setting classes dir, if both are set, both are jointly used
-        // If none is set, compileJava & compileKotlin will be looked for by default
+        // One has to be provided (for task input resolution to work properly, I made it mandatory)
         compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
         classesDirs = files("$buildDir/classes/kotlin/main")
     }
