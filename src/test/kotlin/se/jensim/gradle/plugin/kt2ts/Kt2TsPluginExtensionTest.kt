@@ -87,10 +87,11 @@ class Kt2TsPluginExtensionTest {
         assertThat(project.kt2ts.outputs.firstOrNull()?.outputFile, notNullValue())
         assertFailsWith<Kt2TsException> { project.kt2ts.classDirFiles }
 
-        project.kt2ts.classFilesSources.classesDirs = project.files("./")
+        val fileCollection = project.files(File("./cd"))
+        project.kt2ts.classFilesSources.classesDirs = fileCollection
         val classDirFiles = project.kt2ts.classDirFiles
         assertThat(classDirFiles, hasSize(1))
-        assertThat(classDirFiles.first(), notNullValue())
+        assertThat(classDirFiles.first(), equalTo(fileCollection.singleFile))
 
     }
 

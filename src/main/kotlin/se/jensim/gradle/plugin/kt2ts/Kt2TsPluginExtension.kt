@@ -18,20 +18,16 @@ open class Kt2TsPluginExtension {
     var annotation: String?
         get() = outputs.firstOrNull()?.annotations?.firstOrNull()
         set(value) {
-            if (value != null) {
-                output {
-                    annotations = listOf(value)
-                }
+            output {
+                annotations = listOfNotNull(value)
             }
         }
 
     var annotations: List<String>?
         get() = outputs.mapNotNull { it.annotations }.flatten()
         set(value) {
-            if (value != null) {
-                output {
-                    annotations = value
-                }
+            output {
+                annotations = value
             }
         }
 
