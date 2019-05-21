@@ -69,29 +69,11 @@ open class Kt2TsPluginExtension {
                 classFilesSources.compileTasks?.map { it.get().outputs.files.files }?.flatten()
             ).flatten().filterNotNull()
             return if (summed.isEmpty()) {
-                if (project != null) {
-                    val backup = listOfNotNull(
-                        project?.safeGetTaskOutputs("compileJava"),
-                        project?.safeGetTaskOutputs("compileKotlin")
-                    ).flatten()
-                    if (backup.isEmpty()) {
-                        throw Kt2TsException("No classdirs defined and unable to use defaults.")
-                    } else {
-                        backup
-                    }
-                } else {
-                    throw Kt2TsException("No classdirs defined and unable to use defaults.")
-                }
+                throw Kt2TsException("No classdirs defined and unable to use defaults.")
             } else {
                 summed
             }
         }
-
-    private fun Project?.safeGetTaskOutputs(name: String): List<File>? = try {
-        this?.tasks?.findByName(name)?.outputs?.files?.files?.toList()
-    } catch (e: Exception) {
-        emptyList()
-    }
 
     /**
      * <pre>

@@ -36,11 +36,13 @@ kt2ts {
 
 ```gradle
 // Shorthand versions - with default values
-kt2ts.annotation = "com.example.ToTypescript"
-kt2ts.annotations = listOf("com.example.ToTypescript")
-kt2ts.output {
-    outputFile = file("$projectDir/src/main/resources/kt2ts.d.ts")
+kt2ts {
+    annotation = "com.example.ToTypescript"
+    classFilesSources.compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
+}
+kt2ts {
     annotations = listOf("com.example.ToTypescript")
+    classFilesSources.compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
 }
 ```
 

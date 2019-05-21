@@ -29,6 +29,4 @@ kt2ts {
         classesDirs = files("$buildDir/classes/kotlin/main")
     }
 }
-// Shorthand version - with default values and single annotation->output
-// kt2ts.annotation = "com.example.ToTypescript"
 ```

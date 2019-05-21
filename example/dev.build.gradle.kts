@@ -33,10 +33,7 @@ kt2ts {
         annotations = listOf("com.example.MyJavaAnnotation")
         outputFile = file("$buildDir/ts/java-only.d.ts")
     }
-    classFilesSources {
-        compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
-        classesDirs = files("$buildDir/classes/kotlin/main")
-    }
+    classFilesSources.compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
 }
 
 tasks.withType<KotlinCompile> {

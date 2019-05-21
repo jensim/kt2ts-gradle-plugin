@@ -1,14 +1,7 @@
 package se.jensim.gradle.plugin.kt2ts
 
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
-import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.file.FileCollection
-import org.gradle.api.tasks.TaskContainer
-import org.gradle.api.tasks.TaskOutputs
 import org.gradle.testfixtures.ProjectBuilder
-import org.hamcrest.Matchers.containsInAnyOrder
 import org.hamcrest.Matchers.equalTo
 import org.hamcrest.Matchers.hasSize
 import org.hamcrest.Matchers.notNullValue
@@ -147,34 +140,5 @@ class Kt2TsPluginExtensionTest {
                 outputFile = project.file("${project.buildDir}/ts/out.d.ts")
             }
         }
-    }
-
-    @Test
-    fun `unconfed kt2ts defaults to compileJava and compileKotlin`() {
-        val javaout = project.file("${project.buildDir}/classes/java/main")
-        val kotlinout = project.file("${project.buildDir}/classes/kotlin/main")
-        val project: Project = mock()
-        val taskContainer: TaskContainer = mock()
-        whenever(project.tasks).thenReturn(taskContainer)
-        val javaTask: Task = mock()
-        whenever(taskContainer.findByName("compileJava")).thenReturn(javaTask)
-        val javaOutputs: TaskOutputs = mock()
-        whenever(javaTask.outputs).thenReturn(javaOutputs)
-        val javaFileCollection: FileCollection = mock()
-        whenever(javaOutputs.files).thenReturn(javaFileCollection)
-        whenever(javaFileCollection.files).thenReturn(mutableSetOf(javaout))
-        val kotlinTask: Task = mock()
-        whenever(taskContainer.findByName("compileKotlin")).thenReturn(kotlinTask)
-        val kotlinOutputs: TaskOutputs = mock()
-        whenever(kotlinTask.outputs).thenReturn(kotlinOutputs)
-        val kotlinFileCollection: FileCollection = mock()
-        whenever(kotlinOutputs.files).thenReturn(kotlinFileCollection)
-        whenever(kotlinFileCollection.files).thenReturn(mutableSetOf(kotlinout))
-        val extension = Kt2TsPluginExtension()
-        extension.setProject(project)
-
-        val defaultFiles = extension.classDirFiles
-
-        assertThat(defaultFiles, containsInAnyOrder(javaout, kotlinout))
     }
 }
