@@ -1,38 +1,38 @@
 package se.jensim.gradle.plugin.kt2ts
 
 import com.nhaarman.mockitokotlin2.*
-import org.gradle.api.Action
-import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionContainer
-import org.hamcrest.Matchers.hasSize
+import org.gradle.testfixtures.ProjectBuilder
+import org.hamcrest.Matchers
+import org.hamcrest.Matchers.*
+import org.junit.Assert
 import org.junit.Assert.assertThat
 import org.junit.Test
+import se.jensim.gradle.plugin.kt2ts.internal.Kt2TsException
 import java.io.File
+import kotlin.test.assertFailsWith
 
 class Kt2TsPluginExtensionTest {
 
     @Test
     fun `kt2ts extension func`() {
         // given
-        val mockExtension: ExtensionContainer = mock()
-        val mockProject: Project = mock {
-            on { extensions } doReturn mockExtension
-        }
+        val project= ProjectBuilder.builder().build()
+        project.extensions.create("kt2ts", Kt2TsPluginExtension::class.java)
 
         // when
-        mockProject.kt2ts {
+        project.kt2ts {
             classFilesSources {
                 this.classesDirs = mock()
             }
-            generationSpecification {
+            output {
                 this.annotations = listOf("foo.bar")
                 this.outputFile = File("./ts.d.ts")
             }
         }
 
-
         // then
-        verify(mockExtension).configure(eq("kt2ts"), any<Action<Kt2TsPluginExtension>>())
+        val annotation = project.extensions.findByType(Kt2TsPluginExtension::class.java)?.outputs?.firstOrNull()?.annotations?.firstOrNull()
+        assertThat(annotation, equalTo("foo.bar"))
     }
 
     @Test
@@ -40,15 +40,15 @@ class Kt2TsPluginExtensionTest {
         val extension = Kt2TsPluginExtension()
         val settings: List<() -> Any?> =
             listOf(
-                { extension.generationSpecifications.firstOrNull()?.outputFile },
-                { extension.generationSpecifications.firstOrNull()?.annotations },
+                { extension.outputs.firstOrNull()?.outputFile },
+                { extension.outputs.firstOrNull()?.annotations },
                 { extension.classFilesSources.compileTasks },
                 { extension.classFilesSources.classesDirs }
             )
 
         assertThat(settings.mapNotNull { it.invoke() }, hasSize(0))
 
-        extension.generationSpecification {
+        extension.output {
             outputFile = File("./")
             annotations = listOf("foo")
         }
@@ -58,5 +58,21 @@ class Kt2TsPluginExtensionTest {
         }
 
         assertThat(settings.mapNotNull { it.invoke() }, hasSize(4))
+    }
+
+    @Test
+    fun `only annotation is required`() {
+        val project = ProjectBuilder.builder().build()
+        project.extensions.create("kt2ts", Kt2TsPluginExtension::class.java)
+        project.kt2ts.annotation = "foo.bar"
+
+        assertThat(project.kt2ts.outputs.firstOrNull()?.outputFile, notNullValue())
+        assertFailsWith<Kt2TsException> { project.kt2ts.classDirFiles }
+
+        project.kt2ts.classFilesSources.classesDirs = project.files("./")
+        val classDirFiles = project.kt2ts.classDirFiles
+        assertThat(classDirFiles, hasSize(1))
+        assertThat(classDirFiles.first(), notNullValue())
+
     }
 }

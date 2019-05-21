@@ -67,7 +67,7 @@ class Kt2TsTaskTest {
 
     @Test
     fun getOutput() {
-        extension.generationSpecification {
+        extension.output {
             this.annotations = listOf("com.example.Annotation")
             this.outputFile = File("/")
         }

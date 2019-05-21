@@ -27,7 +27,7 @@ open class Kt2TsTask : DefaultTask() {
     }
 
     @OutputFiles
-    fun getOutput(): List<File> = extension.generationSpecifications.map { it.outputFile!! }.also {
+    fun getOutput(): List<File> = extension.outputs.map { it.outputFile!! }.also {
         if (it.isEmpty()) {
             throw Kt2TsException("No outputFile defined in kt2ts config extension.")
         }

@@ -20,17 +20,20 @@ plugins {
 
 kt2ts {
     // Repeatable block for linking outputfile to a set of annotations
-    generationSpecification {
+    output {
         outputFile = file("$buildDir/ts/kt2ts.d.ts")
         annotations = listOf("com.example.ToTypescript")
     }
     classFilesSources {
         // Two ways of setting classes dir, if both are set, both are jointly used
-        // One of the two must be set
+        // If none is set, compileJava & compileKotlin will be looked for by default
         compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
         classesDirs = files("$buildDir/classes/kotlin/main")
     }
 }
+// Shorthand versions - with default values
+// kt2ts.annotation = "com.example.ToTypescript"
+// kt2ts.annotations = listOf("com.example.ToTypescript")
 ```
 
 Your custom annotation and API data classes

@@ -20,11 +20,15 @@ plugins {
     id("se.jensim.kt2ts") version "$pluginVersion"
 }
 kt2ts {
-    annotation = "com.example.ToTypescript"
-    classesDirs = files(
-        tasks.findByName("compileKotlin")?.outputs,
-        tasks.findByName("compileJava")?.outputs
-    )
-    outputFile = file("$buildDir/ts/kt2ts.d.ts")
+    output {
+        outputFile = file("$buildDir/ts/kt2ts.d.ts")
+        annotations = listOf("com.example.ToTypescript")
+    }
+    classFilesSources {
+        compileTasks = listOf(tasks.compileKotlin, tasks.compileJava)
+        classesDirs = files("$buildDir/classes/kotlin/main")
+    }
 }
+// Shorthand version - with default values and single annotation->output
+// kt2ts.annotation = "com.example.ToTypescript"
 ```

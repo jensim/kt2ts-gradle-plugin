@@ -7,10 +7,10 @@ internal open class Kt2TsServiceImpl(
     private val writer: Kt2TsTypeScriptWriter
 ) : Kt2TsService {
     override fun generateTypescript(extension: Kt2TsPluginExtension) {
-        val annotationToTarget = extension.generationSpecifications
+        val annotationToTarget = extension.outputs
             .flatMap { it.annotations!! }
             .let { classFinder.mapAnnotationsToAnnotatedClasses(it) }
-        val toGenerate = extension.generationSpecifications.map {
+        val toGenerate = extension.outputs.map {
             it.outputFile!! to it.annotations!!.flatMap { annotationToTarget[it]!!.toList() }
         }.toMap()
         writer.write(toGenerate)

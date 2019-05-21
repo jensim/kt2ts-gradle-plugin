@@ -11,7 +11,7 @@ import se.jensim.gradle.plugin.kt2ts.internal.classfilefindertest.ClassToFind
 class Kt2TsServiceImplTest {
 
     private val extension = Kt2TsPluginExtension().apply {
-        generationSpecification {
+        output {
             outputFile = mock()
             annotations = listOf("foo.bar")
         }

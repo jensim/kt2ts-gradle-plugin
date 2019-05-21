@@ -15,11 +15,11 @@ dependencies {
 }
 
 kt2ts {
-    generationSpecification {
+    output {
         outputFile = file("$buildDir/ts/kt2ts.d.ts")
         annotations = listOf("com.example.ToTypescript")
     }
-    generationSpecification {
+    output {
         annotations = listOf("com.example.MyJavaAnnotation")
         outputFile = file("$buildDir/ts/java-only.d.ts")
     }
