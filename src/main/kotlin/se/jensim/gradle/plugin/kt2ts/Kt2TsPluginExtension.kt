@@ -90,7 +90,6 @@ open class Kt2TsPluginExtension {
     private fun Project?.safeGetTaskOutputs(name: String): List<File>? = try {
         this?.tasks?.findByName(name)?.outputs?.files?.files?.toList()
     } catch (e: Exception) {
-        e.printStackTrace() //TODO
         emptyList()
     }
 
