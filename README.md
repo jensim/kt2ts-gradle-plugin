@@ -32,9 +32,16 @@ kt2ts {
         classesDirs = files("$buildDir/classes/kotlin/main")
     }
 }
+```
+
+```gradle
 // Shorthand versions - with default values
-// kt2ts.annotation = "com.example.ToTypescript"
-// kt2ts.annotations = listOf("com.example.ToTypescript")
+kt2ts.annotation = "com.example.ToTypescript"
+kt2ts.annotations = listOf("com.example.ToTypescript")
+kt2ts.output {
+    outputFile = file("$projectDir/src/main/resources/kt2ts.d.ts")
+    annotations = listOf("com.example.ToTypescript")
+}
 ```
 
 Your custom annotation and API data classes
