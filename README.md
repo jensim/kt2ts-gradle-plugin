@@ -5,6 +5,7 @@ Great when working with Angular or other TypeScript frameworks.
 
 This project is a wrapper around the [ts-generator](https://github.com/ntrrgc/ts-generator) project
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/se/jensim/kt2ts/se.jensim.kt2ts.gradle.plugin/maven-metadata.xml.svg?colorB=007ec6&label=gradle-plugin)](https://plugins.gradle.org/plugin/se.jensim.kt2ts)
 [![Build Status](https://travis-ci.org/jensim/kt2ts-gradle-plugin.svg?branch=master)](https://travis-ci.org/jensim/kt2ts-gradle-plugin)
