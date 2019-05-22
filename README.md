@@ -79,7 +79,4 @@ Because we need something like kt2js
 https://youtrack.jetbrains.com/issue/KT-16604
 
 ## Tests
-0% coverage in the plugin
-
-We build and test the example project that uses the plugin.
-At least it's something.
+We use jacoco for testcoverage of the plugin project, on top of that we build and test the example project that uses the plugin.
