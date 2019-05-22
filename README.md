@@ -78,5 +78,5 @@ enum class FouthEnum {
 Because we need something like kt2js
 https://youtrack.jetbrains.com/issue/KT-16604
 
-## Tests
-We use jacoco for testcoverage of the plugin project, on top of that we build and test the example project that uses the plugin.
+## Tests & CI 
+We use jacoco for testcoverage of the plugin project, on top of that we build and test the example project that uses the plugin when building master and tagging releases in TravisCI. All plugin publishings to gradle plugin protal are made in trvisCI after a full build & test has been successful in both the plugin and the example project. 
