@@ -11,7 +11,7 @@ buildscript {
     }
 }
 plugins {
-    kotlin("jvm") version "1.3.31"
+    kotlin("jvm") version "1.4.31"
     `maven-publish`
     `java-gradle-plugin`
     id("org.sonarqube") version "2.7.1"
@@ -30,7 +30,7 @@ version = findProperty("releaseVersion") ?: "DEV"
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(gradleApi())
-    compileOnly("com.github.ntrrgc:ts-generator:1.1.1") {
+    compileOnly("com.github.jensim:ts-generator:1.1.2") {
         exclude(group = "org.jetbrains.kotlin")
     }
     implementation("org.reflections:reflections:0.9.11")
