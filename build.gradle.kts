@@ -30,7 +30,7 @@ version = findProperty("releaseVersion") ?: "DEV"
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(gradleApi())
-    compileOnly("com.github.jensim:ts-generator:1.1.3") {
+    compileOnly("com.github.jensim:ts-generator:1.1.2") {
         exclude(group = "org.jetbrains.kotlin")
     }
     implementation("org.reflections:reflections:0.9.11")
