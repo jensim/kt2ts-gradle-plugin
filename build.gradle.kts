@@ -14,8 +14,8 @@ plugins {
     kotlin("jvm") version "1.4.31"
     `maven-publish`
     `java-gradle-plugin`
-    id("org.sonarqube") version "2.7.1"
-    id("com.gradle.plugin-publish") version "0.10.0"
+    id("org.sonarqube") version "3.1.1"
+    id("com.gradle.plugin-publish") version "0.14.0"
     jacoco
 }
 repositories {
@@ -33,13 +33,13 @@ dependencies {
     compileOnly("com.github.jensim:ts-generator:1.1.2") {
         exclude(group = "org.jetbrains.kotlin")
     }
-    implementation("org.reflections:reflections:0.9.11")
+    implementation("org.reflections:reflections:0.9.12")
 
     testImplementation(kotlin("test-junit"))
     testImplementation(kotlin("reflect"))
-    testImplementation("com.github.ntrrgc:ts-generator:1.1.1")
-    testImplementation("org.hamcrest:hamcrest-core:2.1")
-    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
+    testImplementation("com.github.jensim:ts-generator:1.1.2")
+    testImplementation("org.hamcrest:hamcrest-core:2.2")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
 }
 
 tasks.withType<Jar> {
